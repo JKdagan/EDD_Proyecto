@@ -27,7 +27,7 @@ public:
         while( trie.startsWith(aux2)){
 
             j++;
-            if(aux.size()==1){
+            if(aux.size()==j){
                     break;
                 }
             aux2=aux.substr(0, j+1);
