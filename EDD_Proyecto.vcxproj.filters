@@ -21,10 +21,27 @@
     <ClInclude Include="Huffman.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="compresion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Trie.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LeerArchivo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InputOutput.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Dataset\sources50MB_158065">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

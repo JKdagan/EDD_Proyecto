@@ -6,6 +6,7 @@
 #include <iostream>
 #include <queue>
 #include <map>
+#include <bitset>
 
 
 class Huffman {
@@ -38,9 +39,41 @@ private:
         return str_codificada;
     }
 
+    std::vector<unsigned char> _toBinary(const std::string& str) {
+        std::vector<unsigned char> binaryData;
+        unsigned char currentByte = 0;
+        int bitCount = 0;
+
+        for (char c : str) {
+            currentByte = (currentByte << 1) | (c - '0');
+            bitCount++;
+            if (bitCount == 8) {
+                binaryData.push_back(currentByte);
+                currentByte = 0;
+                bitCount = 0;
+            }
+        }
+
+        if (bitCount > 0) {
+            currentByte <<= (8 - bitCount); // Align the remaining bits to the left
+            binaryData.push_back(currentByte);
+        }
+
+        return binaryData;
+    }
+
+    std::string _fromBinary(const std::vector<unsigned char>& binaryData) {
+        std::string str;
+        for (unsigned char byte : binaryData) {
+            std::bitset<8> bits(byte);
+            str += bits.to_string();
+        }
+        return str;
+    }
+
 public:
     // Funcion principal para codificar un string utilizando Huffman
-    std::string codificar(const std::string& str) {
+    std::vector<unsigned char> codificar(const std::string& str) {
         // Cola de prioridad de nodos que representan los caracteres del string
         std::priority_queue<Nodo*, std::vector<Nodo*>, compararNodos> cola;
 
@@ -79,13 +112,15 @@ public:
         raiz = cola.top(); // La raiz del arbol es el unico nodo restante en la cola
         _obtenerCodigos(raiz, ""); // Obtenemos los codigos Huffman
         str_codificada = _codificarString(raiz, str); // Codificamos el string original
-        return str_codificada;
+        return _toBinary(str_codificada);
     }
 
     // Funcion para decodificar un string codificado usando el arbol de Huffman
-    std::string decodificar(const std::string& str) {
+    std::string decodificar(const std::vector<unsigned char>& binaryData) {
         std::string str_decodificada;
         Nodo* temp = raiz;
+
+        std::string str = _fromBinary(binaryData);
 
         // Recorremos el string codificado caracter por caracter
         for (char c : str) {

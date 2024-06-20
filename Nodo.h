@@ -22,6 +22,11 @@ struct Nodo {
 	bool isHoja() {
 		return izq == nullptr && der == nullptr;
 	}
+
+	~Nodo() {
+		delete izq;
+		delete der;
+	}
 };
 
 //struct para comparar nodos en la priority queue
