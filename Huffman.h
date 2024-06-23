@@ -2,6 +2,17 @@
 
 // Referencia: https://www.geeksforgeeks.org/huffman-coding-greedy-algo-3/
 
+/*
+* Uso del codigo en archivos:
+* Se lee un archivo de texto con la funcion de lectura de InputOutput.h
+* luego se codifica llamando a la funcion codificar que acepta una string
+* y devuelve un vector de unsigned char que se puede escribir en un archivo binario
+* con la funcion de escritura en binario de InputOutput.h
+* para descomprimir se lee el archivo binario con la funcion de lectura en binario
+* de InputOutput.h y se llama a la funcion decodificar que acepta un vector de unsigned char
+* y devuelve un string que se puede escribir en un archivo de texto con la funcion de escritura
+*/
+
 #include "Nodo.h"
 #include <iostream>
 #include <queue>
@@ -39,32 +50,34 @@ private:
         return str_codificada;
     }
 
+    //Funcion auxiliar para convertir un string a un vector de bytes
     std::vector<unsigned char> _toBinary(const std::string& str) {
-        std::vector<unsigned char> binaryData;
-        unsigned char currentByte = 0;
-        int bitCount = 0;
+        std::vector<unsigned char> binary_data;
+        unsigned char current_byte = 0;
+        int bit_count = 0;
 
         for (char c : str) {
-            currentByte = (currentByte << 1) | (c - '0');
-            bitCount++;
-            if (bitCount == 8) {
-                binaryData.push_back(currentByte);
-                currentByte = 0;
-                bitCount = 0;
+            current_byte = (current_byte << 1) | (c - '0'); // Desplaza el byte actual a la izquierda y añade el bit actual
+            bit_count++;
+            if (bit_count == 8) { // Si hemos acumulado 8 bits
+                binary_data.push_back(current_byte); // Añadir el byte al vector
+                current_byte = 0; // Reiniciar el byte actual
+                bit_count = 0; // Reiniciar el contador de bits
             }
         }
 
-        if (bitCount > 0) {
-            currentByte <<= (8 - bitCount); // Align the remaining bits to the left
-            binaryData.push_back(currentByte);
+        if (bit_count > 0) { // Si quedan bits que no llenan un byte completo
+            current_byte <<= (8 - bit_count); // Desplazar el byte a la izquierda para llenar con ceros
+            binary_data.push_back(current_byte); // Añadir el byte final al vector
         }
 
-        return binaryData;
+        return binary_data;
     }
 
-    std::string _fromBinary(const std::vector<unsigned char>& binaryData) {
+    //Funcion auxiliar para convertir un vector de bytes a un string
+    std::string _fromBinary(const std::vector<unsigned char>& binary_data) {
         std::string str;
-        for (unsigned char byte : binaryData) {
+        for (unsigned char byte : binary_data) {
             std::bitset<8> bits(byte);
             str += bits.to_string();
         }
@@ -116,11 +129,11 @@ public:
     }
 
     // Funcion para decodificar un string codificado usando el arbol de Huffman
-    std::string decodificar(const std::vector<unsigned char>& binaryData) {
+    std::string decodificar(const std::vector<unsigned char>& binary_data) {
         std::string str_decodificada;
         Nodo* temp = raiz;
 
-        std::string str = _fromBinary(binaryData);
+        std::string str = _fromBinary(binary_data);
 
         // Recorremos el string codificado caracter por caracter
         for (char c : str) {

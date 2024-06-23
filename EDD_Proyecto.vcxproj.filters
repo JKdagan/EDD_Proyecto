@@ -27,9 +27,6 @@
     <ClInclude Include="Trie.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LeerArchivo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="InputOutput.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -40,7 +37,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Dataset\sources50MB_158065">
+    <None Include="Dataset\sources.50MB">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Dataset\english.50MB">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

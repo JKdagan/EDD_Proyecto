@@ -132,7 +132,6 @@
     <ClInclude Include="compresion.h" />
     <ClInclude Include="Huffman.h" />
     <ClInclude Include="InputOutput.h" />
-    <ClInclude Include="LeerArchivo.h" />
     <ClInclude Include="Nodo.h" />
     <ClInclude Include="Trie.h" />
   </ItemGroup>
@@ -140,7 +139,8 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Dataset\sources50MB_158065" />
+    <None Include="Dataset\english.50MB" />
+    <None Include="Dataset\sources.50MB" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
