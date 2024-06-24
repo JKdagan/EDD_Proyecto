@@ -33,8 +33,7 @@ public:
         while ( block.size()<20000 ) {
         getline(file, line);    
         block+=line;
-	block+="\n";
-        
+        block+="\n";
         
     }
     
@@ -100,6 +99,7 @@ public:
         trie.clear();
         printf("bloque%d\n ", abc);
         abc++;
+        
         
 
 
