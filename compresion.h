@@ -30,7 +30,8 @@ public:
     int abc=1;
     while (file.peek() != EOF){
         Trie trie;
-        while (getline(file, line) && block.size()<20000 ) {
+        while ( block.size()<20000 ) {
+        getline(file, line);    
         block+=line;
         
         
