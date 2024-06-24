@@ -33,6 +33,7 @@ public:
         while ( block.size()<20000 ) {
         getline(file, line);    
         block+=line;
+	block+="\n";
         
         
     }
